@@ -55,7 +55,7 @@ def landmark_train(PATH,train_loader,valid_loader):
         running_loss = 0
         
         network.train()
-        for step in range(1,51):
+        for step in range(1,21):
         
             images, landmarks = next(iter(train_loader))
             
@@ -79,12 +79,12 @@ def landmark_train(PATH,train_loader,valid_loader):
             loss_train += loss_train_step.item()
             running_loss = loss_train/step
             
-            print_overwrite(step, 50, running_loss, 'train')#len(train_loader), running_loss, 'train')
+            print_overwrite(step, 20, running_loss, 'train')#len(train_loader), running_loss, 'train')
             
         network.eval() 
         with torch.no_grad():
             
-            for step in range(1,51):
+            for step in range(1,21):
                 
                 images, landmarks = next(iter(valid_loader))
             
@@ -99,10 +99,10 @@ def landmark_train(PATH,train_loader,valid_loader):
                 loss_valid += loss_valid_step.item()
                 running_loss = loss_valid/step
     
-                print_overwrite(step, 50, running_loss, 'valid')#len(valid_loader), running_loss, 'valid')
+                print_overwrite(step, 20, running_loss, 'valid')#len(valid_loader), running_loss, 'valid')
         
-        loss_train /= 50 #len(train_loader)
-        loss_valid /= 50 #len(valid_loader)
+        loss_train /= 20 #len(train_loader)
+        loss_valid /= 20 #len(valid_loader)
         
         print('\n--------------------------------------------------')
         print('Epoch: {}  Train Loss: {:.4f}  Valid Loss: {:.4f}'.format(epoch, loss_train, loss_valid))
